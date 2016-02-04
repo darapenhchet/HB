@@ -44,7 +44,7 @@ public class CustomSuccessConfiguration extends SimpleUrlAuthenticationSuccessHa
 		if(roles.contains("ROLE_DONOR")){
 			return "/donates";
 		}else if(roles.contains("ROLE_ADMIN")){
-			return "/admin";
+			return "/administrator";
 		}else{
 			return "/access_denied";
 		}

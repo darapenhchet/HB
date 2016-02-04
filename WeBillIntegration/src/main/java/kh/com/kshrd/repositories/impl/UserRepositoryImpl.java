@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository{
 			user.setUsername("user@gmail.com");
 			user.setName("Vuthea");
 			user.setPassword(new BCryptPasswordEncoder().encode("password"));
-			user.setEmail("user@gmail.com");
+			user.setEmail("admin@gmail.com");
 			user.setPhone("086961919");
 			user.setCode("9876");
 			user.setStatus(true);
@@ -38,7 +38,7 @@ public class UserRepositoryImpl implements UserRepository{
 		try{
 			Role role = new Role();
 			role.setId(1);
-			role.setName("ROLE_DONOR");
+			role.setName("ROLE_ADMIN");
 			roles.add(role);
 		}catch(Exception ex){
 			ex.printStackTrace();
