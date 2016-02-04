@@ -9,6 +9,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
 import kh.com.kshrd.entities.Customer;
+import kh.com.kshrd.entities.User;
 
 @Controller
 @RequestMapping(value="/donates")
@@ -26,12 +29,14 @@ public class DonateController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
 			Map<String, Object> input = new HashMap<String, Object>();
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			User user = (User) authentication.getPrincipal();
 			input.put("expiry_date", "20160229");
 			input.put("remark", "HRD DONATION BILLING SYSTEM");
-			input.put("customer_code", customer.getCustomerCode());
-			input.put("customer_name", customer.getCustomerName());
-			input.put("customer_email", customer.getCustomerEmail());
-			input.put("customer_phone", customer.getCustomerPhone());
+			input.put("customer_code", user.getCode());
+			input.put("customer_name", user.getName());
+			input.put("customer_email", user.getEmail());
+			input.put("customer_phone", user.getPhone());
 			input.put("currency", "USD");
 			input.put("amount", customer.getAmount());
 			RestTemplate restTemplate = new RestTemplate();
@@ -48,6 +53,15 @@ public class DonateController {
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			
 		}
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String donate(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		System.out.println(user.getEmail());
+		System.out.println(user.getAuthorities());
+		return "donation";
 	}
 
 }

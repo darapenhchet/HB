@@ -91,11 +91,6 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<!-- MATERIALIZE CSS -->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>materializecss</artifactId>
-			<version>0.97.0</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

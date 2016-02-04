@@ -7,15 +7,24 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug=true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private CustomSuccessConfiguration customSuccessConfiguration; 
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home","/donates").permitAll()
+                //.antMatchers("/", "/home").permitAll()
+                .antMatchers("/donates").hasAnyRole("DONOR","ADMIN")
                 .antMatchers("/administrator/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -24,6 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             	.passwordParameter("password")
                 .loginPage("/login")
                 .permitAll()
+                .successHandler(customSuccessConfiguration)
                 .and()
             .logout()
                 .permitAll();
@@ -31,11 +41,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        /*
         auth
             .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
+                .withUser("user").password("password").roles("DONOR")
                 .and()
         		.withUser("admin").password("password").roles("ADMIN");
+        */
+    	auth.userDetailsService(this.userDetailsService);
     }
     
 	@Override

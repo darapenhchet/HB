@@ -12,9 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import kh.com.kshrd.entities.Customer;
+import kh.com.kshrd.repositories.DonateRepository;
 
 @Repository
-public class DonateRepositoryImpl {
+public class DonateRepositoryImpl implements DonateRepository{
 			
 	public Customer createNewDonate(Customer customer){
 		Map<String, Object> input = new HashMap<String, Object>();
