@@ -3,6 +3,7 @@ package kh.com.kshrd.repositories.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import kh.com.kshrd.entities.Role;
@@ -17,9 +18,9 @@ public class UserRepositoryImpl implements UserRepository{
 		try{
 			User user = new User();
 			user.setId(9988);
-			user.setUsername("user");
+			user.setUsername("user@gmail.com");
 			user.setName("Vuthea");
-			user.setPassword("password");
+			user.setPassword(new BCryptPasswordEncoder().encode("password"));
 			user.setEmail("user@gmail.com");
 			user.setPhone("086961919");
 			user.setCode("9876");
