@@ -1,5 +1,7 @@
 package kh.com.kshrd.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,9 +31,16 @@ public class DonateController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
 			Map<String, Object> input = new HashMap<String, Object>();
+			// TODO: GET USER AUTHENTICATED FROM THE SECURITY CONTEXT 
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			User user = (User) authentication.getPrincipal();
-			input.put("expiry_date", "20160229");
+			
+			// TODO: EXPIRATION DATE IS 1 MONTH AFTER DONATION DATE
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, 1);
+			
+			input.put("expiry_date", simpleDateFormat.format(calendar.getTime()));
 			input.put("remark", "HRD DONATION BILLING SYSTEM");
 			input.put("customer_code", user.getCode());
 			input.put("customer_name", user.getName());

@@ -20,6 +20,9 @@ public class User implements UserDetails{
 	private String password;
 	private String code;
 	private String phone;
+	private int billerId;
+	private String accountNo;
+	private String weBillCustomerId;
 	private List<Role> roles;
 	private boolean status;
 
@@ -181,4 +184,46 @@ public class User implements UserDetails{
 		this.status = status;
 	}
 
+	/**
+	 * @return the billerId
+	 */
+	public int getBillerId() {
+		return billerId;
+	}
+
+	/**
+	 * @param billerId the billerId to set
+	 */
+	public void setBillerId(int billerId) {
+		this.billerId = billerId;
+	}
+
+	/**
+	 * @return the accountNo
+	 */
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	/**
+	 * @param accountNo the accountNo to set
+	 */
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	/**
+	 * @return the weBillCustomerId
+	 */
+	public String getWeBillCustomerId() {
+		return weBillCustomerId;
+	}
+
+	/**
+	 * @param weBillCustomerId the weBillCustomerId to set
+	 */
+	public void setWeBillCustomerId(String weBillCustomerId) {
+		this.weBillCustomerId = weBillCustomerId;
+	}
+	
 }
