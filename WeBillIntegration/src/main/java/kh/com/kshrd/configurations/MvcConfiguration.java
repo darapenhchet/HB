@@ -1,14 +1,17 @@
 package kh.com.kshrd.configurations;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
@@ -52,6 +55,23 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());*/
 		return restTemplate;
+	}
+	
+	// DATABASE CONFIGURATION BEAN
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("123456");
+		return dataSource;
+	}
+
+	@Bean
+	public JdbcTemplate getJdbcTemplate() {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
+		return jdbcTemplate;
 	}
 	
 }
