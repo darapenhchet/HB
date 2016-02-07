@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity(debug=true)
@@ -26,9 +27,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                //.antMatchers("/", "/home").permitAll()
-                .antMatchers("/donates").hasAnyRole("DONOR","ADMIN")
-                .antMatchers("/administrator/**").hasRole("ADMIN")
+                .antMatchers("/users/signup").permitAll()
+                .antMatchers("/donates").hasAnyRole("DONOR","ADMIN", "BILLER")
+                .antMatchers("/administrator/**").hasAnyRole("ADMIN", "BILLER")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -39,6 +40,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .successHandler(customSuccessConfiguration)
                 .and()
             .logout()
+            	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            	.logoutSuccessUrl("/login")
                 .permitAll();
     }
 
@@ -66,5 +69,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
+	}
+	
+	public static void main(String args[]){
+		System.out.println(new BCryptPasswordEncoder().encode("password"));
 	}
 }
