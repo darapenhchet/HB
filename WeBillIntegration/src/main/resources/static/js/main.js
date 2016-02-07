@@ -1,5 +1,14 @@
 $(function() {
 	var customer = {};
+	
+	var _ctx = ($("meta[name='ctx']").attr("content")===undefined) ? "" : $("meta[name='ctx']").attr("content");
+
+	// Prepend context path to all jQuery AJAX requests
+	$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+	    if (!options.crossDomain) {
+	        options.url = _ctx + options.url;
+	    }
+	});
 	customer.donates = function(){
 		var input = {
 			"expiry_date" : "20160229",
@@ -40,13 +49,13 @@ $(function() {
 	
 	customer.signup = function(){
 		var input = {
-		    	"customer_code" : $("#txtCustomerCode").val(),
-		    	"customer_name" : $("#txtCustomerName").val(),
-		    	"customer_email" : $("#txtCustomerEmail").val(),
-		    	"customer_phone" : $("#txtCustomerPhone").val()
+				"name" : $("#txtCustomerName").val(),
+		    	"email" : $("#txtCustomerEmailSignup").val(),
+		    	"phone" : $("#txtCustomerPhone").val(),
+		    	"password" : $("#txtPasswordSingup").val(),
 			};
 			$.ajax({ 
-			    url: "/signup", 
+			    url: "/users/signup", 
 			    type: 'POST', 
 			    dataType: 'JSON', 
 			    data: JSON.stringify(input),  
@@ -57,14 +66,14 @@ $(function() {
 	            },
 			    success: function(data) { 
 			    	console.log(data);
-			    	/*if(data.RESP_DATA.response_code=="200"){
-			    		$("#alertSuccess").show();
-			    		$("#alertSuccess").delay(5000).fadeOut(400);
+			    	if(data.RESP_CODE==200){
+			    		$("#signUp #alertSuccess").show();
+			    		$("#signUp #alertSuccess").delay(5000).fadeOut(400);
 			    	}else{
-			    		$("#errorMessage").html(data.RESP_DATA.response_msg);
-			    		$("#alertDanger").show();
-			    		$("#alertDanger").delay(5000).fadeOut(400);
-			    	}*/
+			    		$("#signUp #errorMessage").html(data.RESP_DATA.RESP_MSG);
+			    		$("#signUp #alertDanger").show();
+			    		$("#signUp #alertDanger").delay(5000).fadeOut(400);
+			    	}
 			    },
 			    error:function(data,status,er) { 
 			        console.log("error: "+data+" status: "+status+" er:"+er);
@@ -75,5 +84,9 @@ $(function() {
 	$("#btnSubmit").click(function(){
 		customer.donates();
 	});
+	
+	$("#btnSignup").click(function(){
+		customer.signup();
+	})
 	
 });
