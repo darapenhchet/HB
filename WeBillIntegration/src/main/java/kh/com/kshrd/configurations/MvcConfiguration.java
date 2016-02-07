@@ -1,13 +1,9 @@
 package kh.com.kshrd.configurations;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -58,10 +54,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	}
 	
 	// DATABASE CONFIGURATION BEAN
-	@Bean
+	/*@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/billing_db");
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("123456");
@@ -72,7 +68,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public JdbcTemplate getJdbcTemplate() {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
-	}
+	}*/
 	
 }
 

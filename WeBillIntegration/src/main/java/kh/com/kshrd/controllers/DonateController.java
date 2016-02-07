@@ -42,7 +42,7 @@ public class DonateController {
 			
 			input.put("expiry_date", simpleDateFormat.format(calendar.getTime()));
 			input.put("remark", "HRD DONATION BILLING SYSTEM");
-			input.put("customer_code", user.getCode());
+			input.put("customer_code", user.getId());
 			input.put("customer_name", user.getName());
 			input.put("customer_email", user.getEmail());
 			input.put("customer_phone", user.getPhone());

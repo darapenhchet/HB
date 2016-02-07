@@ -2,8 +2,16 @@ package kh.com.kshrd.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.hateoas.ResourceSupport;
 
+@Entity
+@Table(name="billers")
 public class Biller extends ResourceSupport implements Serializable{
 
 	/**
@@ -11,7 +19,9 @@ public class Biller extends ResourceSupport implements Serializable{
 	 */
 	private static final long serialVersionUID = -4710728028462657414L;
 
-	private int billerId;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long billerId;
 	
 	private String billerCode;
 	
@@ -38,18 +48,27 @@ public class Biller extends ResourceSupport implements Serializable{
 	private String deletedBy;
 	
 	private String status;
+	
+	public Biller() {
+		super();
+	}
+
+	public Biller(String billerCode, String billerName){
+		this.billerCode = billerCode;
+		this.billerName = billerName;
+	}
 
 	/**
 	 * @return the billerId
 	 */
-	public int getBillerId() {
+	public Long getBillerId() {
 		return billerId;
 	}
 
 	/**
 	 * @param billerId the billerId to set
 	 */
-	public void setBillerId(int billerId) {
+	public void setBillerId(Long billerId) {
 		this.billerId = billerId;
 	}
 
@@ -233,6 +252,44 @@ public class Biller extends ResourceSupport implements Serializable{
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Biller [billerId=");
+		builder.append(billerId);
+		builder.append(", billerCode=");
+		builder.append(billerCode);
+		builder.append(", billerName=");
+		builder.append(billerName);
+		builder.append(", billerPhone=");
+		builder.append(billerPhone);
+		builder.append(", billerEmail=");
+		builder.append(billerEmail);
+		builder.append(", accountNo=");
+		builder.append(accountNo);
+		builder.append(", authorizationBasic=");
+		builder.append(authorizationBasic);
+		builder.append(", createdDate=");
+		builder.append(createdDate);
+		builder.append(", createdBy=");
+		builder.append(createdBy);
+		builder.append(", updatedDate=");
+		builder.append(updatedDate);
+		builder.append(", updatedBy=");
+		builder.append(updatedBy);
+		builder.append(", deletedDate=");
+		builder.append(deletedDate);
+		builder.append(", deletedBy=");
+		builder.append(deletedBy);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }
