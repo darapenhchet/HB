@@ -57,6 +57,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     	auth
     		.userDetailsService(this.userDetailsService)
     		.passwordEncoder(this.passwordEncoder());
+    	
+    	//auth.authenticationProvider();
+    	auth.userDetailsService(userDetailsService);
     }
     
 	@Override

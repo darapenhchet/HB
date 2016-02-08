@@ -41,14 +41,13 @@ public class CustomSuccessConfiguration extends SimpleUrlAuthenticationSuccessHa
 			System.out.println(authority.getAuthority());
 			roles.add(authority.getAuthority());
 		}
-		if(roles.contains("ROLE_DONOR")){
-			return "/donates";
-		}else if(roles.contains("ROLE_ADMIN")){
+		if(roles.contains("ROLE_ADMIN")){
 			return "/administrator";
+		}else if(roles.contains("ROLE_DONOR")){
+			return "/donates";
 		}else{
 			return "/access_denied";
 		}
-		
 	}
 
 	public RedirectStrategy getRedirectStrategy() {

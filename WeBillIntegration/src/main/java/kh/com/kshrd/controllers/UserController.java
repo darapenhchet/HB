@@ -37,4 +37,13 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value="/donors", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> findAllDonors(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("RESP_DATA", userService.findAllDonors());
+		map.put("RESP_CODE", 200);
+		map.put("RESP_MSG", "Donor has been signup successfully.");
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+	}
+	
 }
