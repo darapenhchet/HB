@@ -15,10 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="users")
@@ -36,6 +39,11 @@ public class User implements UserDetails, Serializable{
 	private String email;
 	private String username;
 	private String name;
+	
+	@OneToOne
+	private Account account;
+	
+	@JsonIgnore
 	private String password;
 	private String phone;
 	
@@ -188,6 +196,20 @@ public class User implements UserDetails, Serializable{
 	 */
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	/**
+	 * @return the account
+	 */
+	public Account getAccount() {
+		return account;
+	}
+
+	/**
+	 * @param account the account to set
+	 */
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 }

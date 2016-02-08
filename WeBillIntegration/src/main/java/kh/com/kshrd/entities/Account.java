@@ -42,7 +42,7 @@ public class Account extends ResourceSupport implements Serializable {
 	@Column(name="account_no")
 	private String accountNo;
 	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy = "account")
+	@OneToMany
 	private Set<Bill> bills = new HashSet<Bill>();
 
 	/**

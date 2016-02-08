@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,8 +55,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public List<User> findAllDonors() {
-		return (List<User>) userRepository.findAll();
+	public Page<User> findAllDonors(Pageable pageable) {
+		return (Page<User>) userRepository.findAll(pageable);
 	}
 	
 }

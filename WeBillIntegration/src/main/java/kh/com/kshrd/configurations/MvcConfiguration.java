@@ -1,7 +1,9 @@
 package kh.com.kshrd.configurations;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
@@ -70,5 +72,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		return jdbcTemplate;
 	}*/
 	
+	@Autowired
+	protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+		config.setPageParamName("page")
+	        .setLimitParamName("limit")
+	        .setSortParamName("q");
+	}
 }
 

@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.com.kshrd.entities.User;
 import kh.com.kshrd.services.UserService;
@@ -38,12 +42,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/donors", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> findAllDonors(){
+	@ResponseBody
+	public Page<User> findAllDonors(@PageableDefault(size = 20, page = 0) Pageable pageable){
+		System.out.println(pageable.getPageNumber());
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("RESP_DATA", userService.findAllDonors());
+		Page<User> users = userService.findAllDonors(pageable);
+		return users;
+		/*map.put("RESP_DATA", users);
 		map.put("RESP_CODE", 200);
 		map.put("RESP_MSG", "Donor has been signup successfully.");
-		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);*/
 	}
 	
 }

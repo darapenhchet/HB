@@ -11,4 +11,6 @@ public interface AccountService {
 	public Boolean updateExistingAccount(Account account);
 	
 	public Boolean save(Account account);
+	
+	public Account findOne(Long id);
 }
