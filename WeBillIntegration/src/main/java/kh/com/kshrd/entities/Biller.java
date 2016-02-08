@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
 
-@Entity
-@Table(name="billers")
+/*@Entity
+@Table(name="billers")*/
 public class Biller extends ResourceSupport implements Serializable{
 
 	/**

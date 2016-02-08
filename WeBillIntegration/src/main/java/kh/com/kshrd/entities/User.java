@@ -38,8 +38,6 @@ public class User implements UserDetails, Serializable{
 	private String name;
 	private String password;
 	private String phone;
-	private String accountNo;
-	private String weBillCustomerId;
 	
 	@ManyToMany(fetch= FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_roles", 
@@ -171,34 +169,6 @@ public class User implements UserDetails, Serializable{
 	
 	public void setStatus(boolean status){
 		this.status = status;
-	}
-
-	/**
-	 * @return the accountNo
-	 */
-	public String getAccountNo() {
-		return accountNo;
-	}
-
-	/**
-	 * @param accountNo the accountNo to set
-	 */
-	public void setAccountNo(String accountNo) {
-		this.accountNo = accountNo;
-	}
-
-	/**
-	 * @return the weBillCustomerId
-	 */
-	public String getWeBillCustomerId() {
-		return weBillCustomerId;
-	}
-
-	/**
-	 * @param weBillCustomerId the weBillCustomerId to set
-	 */
-	public void setWeBillCustomerId(String weBillCustomerId) {
-		this.weBillCustomerId = weBillCustomerId;
 	}
 
 	@Override

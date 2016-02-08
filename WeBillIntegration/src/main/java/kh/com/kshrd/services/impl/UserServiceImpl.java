@@ -1,5 +1,7 @@
 package kh.com.kshrd.services.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,11 @@ public class UserServiceImpl implements UserService{
 			ex.printStackTrace();
 		}
 		return null;
-		
 	}
+	
+	@Override
+	public List<User> findAllDonors() {
+		return (List<User>) userRepository.findAll();
+	}
+	
 }

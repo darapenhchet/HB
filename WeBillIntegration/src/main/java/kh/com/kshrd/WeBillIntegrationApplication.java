@@ -2,15 +2,10 @@ package kh.com.kshrd;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import kh.com.kshrd.entities.Biller;
-import kh.com.kshrd.repositories.BillRepository;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages="kh.com.kshrd.repositories")
@@ -23,7 +18,7 @@ public class WeBillIntegrationApplication {
 		SpringApplication.run(WeBillIntegrationApplication.class, args);
 	}
 	
-	@Bean
+	/*@Bean
 	public CommandLineRunner demo(BillRepository repository) {
 		return (args) -> {
 			// save a couple of customers
@@ -45,5 +40,5 @@ public class WeBillIntegrationApplication {
 				System.out.println(biller.toString());
 			}
 		};
-	}
+	}*/
 }
