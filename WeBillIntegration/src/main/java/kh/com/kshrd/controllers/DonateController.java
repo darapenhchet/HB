@@ -77,23 +77,23 @@ public class DonateController {
 					account.setCustomerId(Long.valueOf((String)mapResponseBody.get("customer_id")));
 					account.setUser(user);
 					Bill bill = new Bill();
-					bill.setBiilingId(Long.valueOf((String)mapResponseBody.get("billing_id")));
+//					bill.setBiilingId(Long.valueOf((String)mapResponseBody.get("billing_id")));
 					bill.setAmount(donationFilter.getAmount());
 					bill.setCreatedDate(new Date());
 					bill.setCurrency("USD");
 					bill.setExpiryDate(calendar.getTime());
-					bill.setAccount(account);
+//					bill.setAccount(account);
 					billService.registerNewBill(bill);
 					map.put("RESP_DATA", response.getBody());
 				}else{
 					System.out.println("NOT NULL");
 					Bill bill = new Bill();
-					bill.setBiilingId(Long.valueOf((String)mapResponseBody.get("billing_id")));
+//					bill.setBiilingId(Long.valueOf((String)mapResponseBody.get("billing_id")));
 					bill.setAmount(donationFilter.getAmount());
 					bill.setCreatedDate(new Date());
 					bill.setCurrency("USD");
 					bill.setExpiryDate(calendar.getTime());
-					bill.setAccount(account);
+//					bill.setAccount(account);
 					account.getBills().add(bill);
 					System.out.println(account.getBills());
 					billService.registerNewBill(bill);

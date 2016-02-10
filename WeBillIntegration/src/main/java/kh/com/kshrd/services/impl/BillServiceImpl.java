@@ -32,7 +32,8 @@ public class BillServiceImpl implements BillService {
 	
 	@Override
 	public Page<Bill> findByAccount(Account account, Pageable pageable) {
-		return billRepository.findByAccount(account, pageable);
+		//return billRepository.findByAccount(account, pageable);
+		return null;
 	}
 
 }

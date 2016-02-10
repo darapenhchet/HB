@@ -4,15 +4,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,35 +28,22 @@ public class Account extends ResourceSupport implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="account_id")
-	private Long accountId;
+	@Column(name="customer_id")
+	private Long customerId;
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@Column(name="customer_id")
-	private Long customerId;
-	
 	@Column(name="account_no")
 	private String accountNo;
 	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name="billings",
+			joinColumns = { @JoinColumn(name = "customer_id") },
+			inverseJoinColumns = {@JoinColumn(name = "bill_id")}
+			)
 	private Set<Bill> bills = new HashSet<Bill>();
-
-	/**
-	 * @return the id
-	 */
-	public Long getAccountId() {
-		return accountId;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
-	}
 
 	/**
 	 * @return the user

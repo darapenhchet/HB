@@ -29,10 +29,6 @@ public class Bill extends ResourceSupport implements Serializable {
 	@Column(name="bill_id")
 	private Long billId;
 	
-	@Column(name="billing_id")
-	private Long biilingId;
-
-	
 	@Column(name="amount")
 	private Double amount;
 	
@@ -45,9 +41,9 @@ public class Bill extends ResourceSupport implements Serializable {
 	@Column(name="created_date")
 	private Date createdDate;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "account_id")
-	private Account account;
+	@Column(name="bil_title")
+	private String billTitle;
+	
 
 	/**
 	 * @return the billId
@@ -61,20 +57,6 @@ public class Bill extends ResourceSupport implements Serializable {
 	 */
 	public void setBillId(Long billId) {
 		this.billId = billId;
-	}
-
-	/**
-	 * @return the biilingId
-	 */
-	public Long getBiilingId() {
-		return biilingId;
-	}
-
-	/**
-	 * @param biilingId the biilingId to set
-	 */
-	public void setBiilingId(Long biilingId) {
-		this.biilingId = biilingId;
 	}
 
 	/**
@@ -134,18 +116,19 @@ public class Bill extends ResourceSupport implements Serializable {
 	}
 
 	/**
-	 * @return the account
+	 * @return the createdDate
 	 */
-	public Account getAccount() {
-		return account;
+	public String getBillTitle() {
+		return billTitle;
 	}
 
 	/**
-	 * @param account the account to set
+	 * @param createdDate the createdDate to set
 	 */
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setBillTitle(String billTitle) {
+		this.billTitle = billTitle;
 	}
+
 
 	/**
 	 * @return the serialversionuid
