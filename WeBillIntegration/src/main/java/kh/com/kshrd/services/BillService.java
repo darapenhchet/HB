@@ -10,6 +10,6 @@ public interface BillService {
 
 	public Boolean registerNewBill(Bill bill);
 	
-	public Page<Bill> findByAccount(Account account, Pageable pageable);
+	//public Page<Bill> findByAccount(Account account, Pageable pageable);
 	
 }

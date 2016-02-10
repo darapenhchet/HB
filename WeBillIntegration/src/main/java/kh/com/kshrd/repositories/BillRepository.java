@@ -9,5 +9,5 @@ import kh.com.kshrd.entities.Bill;
 
 public interface BillRepository extends PagingAndSortingRepository<Bill, Long> {
 	
-	public Page<Bill> findByAccount(Account account, Pageable pageable);
+	//public Page<Bill> findByAccount(Account account, Pageable pageable);
 }

@@ -2,6 +2,8 @@ package kh.com.kshrd.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -45,9 +48,8 @@ public class Bill extends ResourceSupport implements Serializable {
 	@Column(name="created_date")
 	private Date createdDate;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "account_id")
-	private Account account;
+	@ManyToMany(mappedBy="bills")
+	private Set<Account> accounts = new HashSet<Account>();
 
 	/**
 	 * @return the billId
@@ -132,19 +134,19 @@ public class Bill extends ResourceSupport implements Serializable {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
+	
 	/**
-	 * @return the account
+	 * @return the accounts
 	 */
-	public Account getAccount() {
-		return account;
+	public Set<Account> getAccounts() {
+		return accounts;
 	}
 
 	/**
-	 * @param account the account to set
+	 * @param accounts the accounts to set
 	 */
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 	/**

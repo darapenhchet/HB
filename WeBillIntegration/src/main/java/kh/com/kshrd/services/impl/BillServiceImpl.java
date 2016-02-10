@@ -30,9 +30,9 @@ public class BillServiceImpl implements BillService {
 		return false;
 	}
 	
-	@Override
+	/*@Override
 	public Page<Bill> findByAccount(Account account, Pageable pageable) {
 		return billRepository.findByAccount(account, pageable);
-	}
+	}*/
 
 }

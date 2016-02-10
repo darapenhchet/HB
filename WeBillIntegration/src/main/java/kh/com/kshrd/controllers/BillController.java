@@ -24,13 +24,13 @@ public class BillController {
 	@Autowired
 	private AccountService accountService;
 	
-	@RequestMapping(value="/account/{accountId}/bills", method=RequestMethod.GET)
+	/*@RequestMapping(value="/account/{accountId}/bills", method=RequestMethod.GET)
 	@ResponseBody
 	public Page<Bill> findAllBillByDonorId(@PathVariable("accountId") Long accountId, @PageableDefault(size = 20, page = 0) Pageable pageable){
 		Account account = accountService.findOne(accountId);
 		Page<Bill> bills = billService.findByAccount(account, pageable);
 		return bills;
 		
-	}
+	}*/
 
 }

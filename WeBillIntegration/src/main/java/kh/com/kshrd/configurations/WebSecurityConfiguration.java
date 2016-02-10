@@ -27,7 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/users/signup").permitAll()
+                .antMatchers("/users/signup**").permitAll()
                 .antMatchers("/donates").hasAnyRole("DONOR","ADMIN", "BILLER")
                 .antMatchers("/administrator/**").hasAnyRole("ADMIN", "BILLER")
                 .anyRequest().authenticated()
@@ -44,6 +44,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             	.logoutSuccessUrl("/login")
                 .permitAll();
     }
+    //FUCK YOU !!!!!!!!!
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
