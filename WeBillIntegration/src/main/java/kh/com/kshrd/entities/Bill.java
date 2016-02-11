@@ -2,6 +2,8 @@ package kh.com.kshrd.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,6 +32,10 @@ public class Bill extends ResourceSupport implements Serializable {
 	@Column(name="bill_id")
 	private Long billId;
 	
+	@Column(name="billing_id")
+	private Long biilingId;
+
+	
 	@Column(name="amount")
 	private Double amount;
 	
@@ -41,9 +48,8 @@ public class Bill extends ResourceSupport implements Serializable {
 	@Column(name="created_date")
 	private Date createdDate;
 	
-	@Column(name="bil_title")
-	private String billTitle;
-	
+	@ManyToMany(mappedBy="bills", fetch = FetchType.LAZY)
+	private Set<Account> accounts = new HashSet<Account>();
 
 	/**
 	 * @return the billId
@@ -57,6 +63,20 @@ public class Bill extends ResourceSupport implements Serializable {
 	 */
 	public void setBillId(Long billId) {
 		this.billId = billId;
+	}
+
+	/**
+	 * @return the biilingId
+	 */
+	public Long getBiilingId() {
+		return biilingId;
+	}
+
+	/**
+	 * @param biilingId the biilingId to set
+	 */
+	public void setBiilingId(Long biilingId) {
+		this.biilingId = biilingId;
 	}
 
 	/**
@@ -114,21 +134,20 @@ public class Bill extends ResourceSupport implements Serializable {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
+	
 	/**
-	 * @return the createdDate
+	 * @return the accounts
 	 */
-	public String getBillTitle() {
-		return billTitle;
+	public Set<Account> getAccounts() {
+		return accounts;
 	}
 
 	/**
-	 * @param createdDate the createdDate to set
+	 * @param accounts the accounts to set
 	 */
-	public void setBillTitle(String billTitle) {
-		this.billTitle = billTitle;
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
 	}
-
 
 	/**
 	 * @return the serialversionuid

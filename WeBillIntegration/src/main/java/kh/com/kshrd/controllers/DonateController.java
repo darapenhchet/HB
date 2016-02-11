@@ -82,6 +82,8 @@ public class DonateController {
 					bill.setCreatedDate(new Date());
 					bill.setCurrency("USD");
 					bill.setExpiryDate(calendar.getTime());
+					bill.getAccounts().add(account);
+					account.getBills().add(bill);
 //					bill.setAccount(account);
 					billService.registerNewBill(bill);
 					map.put("RESP_DATA", response.getBody());
@@ -95,6 +97,7 @@ public class DonateController {
 					bill.setExpiryDate(calendar.getTime());
 //					bill.setAccount(account);
 					account.getBills().add(bill);
+					bill.getAccounts().add(account);
 					System.out.println(account.getBills());
 					billService.registerNewBill(bill);
 					map.put("RESP_DATA", response.getBody());

@@ -1,5 +1,7 @@
 package kh.com.kshrd.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,11 +28,15 @@ public class BillController {
 	
 	@RequestMapping(value="/account/{accountId}/bills", method=RequestMethod.GET)
 	@ResponseBody
-	public Page<Bill> findAllBillByDonorId(@PathVariable("accountId") Long accountId, @PageableDefault(size = 20, page = 0) Pageable pageable){
-		Account account = accountService.findOne(accountId);
-		Page<Bill> bills = billService.findByAccount(account, pageable);
+//	public Page<Bill> findAllBillByDonorId(@PathVariable("accountId") Long accountId, @PageableDefault(size = 20, page = 0) Pageable pageable){
+//		Account account = accountService.findOne(accountId);
+//		Page<Bill> bills = billService.findByAccount(account, pageable);
+//		return bills;
+//	}
+
+	public List<Bill> findAllBillByAccountId(@PathVariable("accountId") Long accountId, @PageableDefault(size = 20, page = 0) Pageable pageable){
+		List<Bill> bills = billService.findByAccountId(accountId);
 		return bills;
-		
 	}
 
 }

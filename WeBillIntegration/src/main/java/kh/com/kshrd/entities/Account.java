@@ -28,22 +28,38 @@ public class Account extends ResourceSupport implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="customer_id")
-	private Long customerId;
+	@Column(name="account_id")
+	private Long accountId;
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@Column(name="customer_id")
+	private Long customerId;
+	
 	@Column(name="account_no")
 	private String accountNo;
 	
 	@ManyToMany
-	@JoinTable(name="billings",
-			joinColumns = { @JoinColumn(name = "customer_id") },
-			inverseJoinColumns = {@JoinColumn(name = "bill_id")}
-			)
+	@JoinTable(name="billings", 
+            joinColumns = { @JoinColumn(name = "account_id") }, 
+            inverseJoinColumns = { @JoinColumn(name = "bill_id")})
 	private Set<Bill> bills = new HashSet<Bill>();
+
+	/**
+	 * @return the id
+	 */
+	public Long getAccountId() {
+		return accountId;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
+	}
 
 	/**
 	 * @return the user

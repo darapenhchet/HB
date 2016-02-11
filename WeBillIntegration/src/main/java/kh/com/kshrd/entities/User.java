@@ -47,7 +47,7 @@ public class User implements UserDetails, Serializable{
 	private String password;
 	private String phone;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", 
              joinColumns = { @JoinColumn(name = "user_id") }, 
              inverseJoinColumns = { @JoinColumn(name = "role_id") })
